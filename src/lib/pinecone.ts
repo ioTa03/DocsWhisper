@@ -89,19 +89,19 @@ export const truncateStringByBytes = (str: string, bytes: number) => {
     return new TextDecoder("utf-8").decode(enc.encode(str).slice(0, bytes));
   };
 
-async function prepareDocument(page: PDFPage) {
-    let { pageContent, metadata } = page;
-    pageContent = pageContent.replace(/\n/g, "");
+  async function prepareDocument(page: PDFPage) {
+    const { pageContent, metadata } = page; // Change 'let' to 'const' here
+    const modifiedPageContent = pageContent.replace(/\n/g, "");
     // split the docs
     const splitter = new RecursiveCharacterTextSplitter();
     const docs = await splitter.splitDocuments([
       new Document({
-        pageContent,
+        pageContent: modifiedPageContent,
         metadata: {
           pageNumber: metadata.loc.pageNumber,
-          text: truncateStringByBytes(pageContent, 36000),
+          text: truncateStringByBytes(modifiedPageContent, 36000),
         },
       }),
     ]);
     return docs;
-  }
+}
