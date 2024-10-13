@@ -5,7 +5,6 @@ import { auth } from '@clerk/nextjs/server';
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import {LogIn} from 'lucide-react';
 import { chats } from "@/lib/db/schema";
 import { db } from "@/lib/db";
